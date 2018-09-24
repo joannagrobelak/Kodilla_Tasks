@@ -17,12 +17,15 @@ public class TrelloController {
     @Autowired
     private TrelloClient trelloClient;
 
+    private static final String KEYWORD = "Kodilla";
+
     @RequestMapping(method = RequestMethod.GET, value = "getTrelloBoards")
     public void getTrelloBoards() {
 
         List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards().stream()
-                .filter(board -> board.getId()!=null&&board.getName().contains("Kodilla"))
-                .collect(Collectors.toList());;
+                .filter(board -> board.getId()!=null)
+                .filter(board -> board.getName().contains(KEYWORD))
+                .collect(Collectors.toList());
 
         trelloBoards.forEach(trelloBoardDto -> System.out.println(trelloBoardDto.getId() + " " + trelloBoardDto.getName()));
     }
