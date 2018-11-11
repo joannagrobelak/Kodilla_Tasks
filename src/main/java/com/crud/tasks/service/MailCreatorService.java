@@ -1,6 +1,7 @@
 package com.crud.tasks.service;
 
 import com.crud.tasks.config.AdminConfig;
+import com.crud.tasks.config.CompanyDetailsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class MailCreatorService {
     private AdminConfig adminConfig;
 
     @Autowired
+    private CompanyDetailsConfig companyDetailsConfig;
+
+    @Autowired
     @Qualifier("templateEngine")
     private TemplateEngine templateEngine;
 
@@ -30,6 +34,8 @@ public class MailCreatorService {
         context.setVariable("tasks_url", "http://localhost:8888/crud");
         context.setVariable("button", "Visit website");
         context.setVariable("admin_name", adminConfig.getAdminName());
+        context.setVariable("company_details", companyDetailsConfig.getDetails());
+        context.setVariable("goodbye_message", "See you next time!");
         context.setVariable("show_button", false);
         context.setVariable("is_friend", false);
         context.setVariable("admin_config", adminConfig);
